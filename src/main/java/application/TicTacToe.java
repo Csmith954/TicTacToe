@@ -3,10 +3,13 @@ package application;
 import ui.UserInput;
 import ui.UserOutput;
 
+import java.util.Random;
+
 public class TicTacToe {
     public static final int MAX_BOARD_POSITIONS = 9;
     public static final char X_MARKER = 'X';
     public static final char O_MARKER = 'O';
+    public boolean isGameOver = false;
 
     /*
      * Winning positions for reference
@@ -44,13 +47,107 @@ public class TicTacToe {
         this.board = initializeBoard();
 
         userOutput.gameIntroduction();
-        userOutput.displayBoard(board);
 
         // 1. Keep playing while there are still options for the user or opponent
         // to select, i.e. not all the elements in the board are X_MARKER or O_MARKER.
+        while (!isGameOver){
+            userOutput.displayBoard(board);
+            String userSelection = userInput.getSelection();
+            int userNum = Integer.parseInt(userSelection);
+            int randNum = new Random().nextInt(9);
 
+            if (board[userNum] == 'X' && board[userNum] == 'O'){
+                System.out.println("That position is already taken. Please enter a valid selection");
+            } else {
+                board[userNum] = 'X';
+            }
+            if (board[randNum] != 'X' && board[randNum] != 'O'){
+                board[randNum] = 'O';
+            } else{
+                boolean isEqual = true;
+                while(isEqual){
+                    int newRandNum = new Random().nextInt(9);
+                    if (board[newRandNum] != 'X' && board[newRandNum] != 'O'){
+                        board[newRandNum] = 'O';
+                        isEqual = false;
+                    }
+                }
+            }
+            if (board[0] == 'X' && board[1] == 'X' && board[2] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[0] == 'O' && board[1] == 'O' && board[2] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[3] == 'X' && board[4] == 'X' && board[5] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[3] == 'O' && board[4] == 'O' && board[5] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[6] == 'X' && board[7] == 'X' && board[8] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[6] == 'O' && board[7] == 'O' && board[8] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[0] == 'X' && board[3] == 'X' && board[6] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[0] == 'O' && board[3] == 'O' && board[6] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[1] == 'X' && board[4] == 'X' && board[7] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[1] == 'O' && board[4] == 'O' && board[7] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[2] == 'X' && board[5] == 'X' && board[8] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[2] == 'O' && board[5] == 'O' && board[8] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[0] == 'X' && board[4] == 'X' && board[8] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[0] == 'O' && board[4] == 'O' && board[8] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+            if (board[2] == 'X' && board[4] == 'X' && board[6] =='X'){
+                System.out.println("You Win!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            } else if (board[2] == 'O' && board[4] == 'O' && board[6] =='O'){
+                System.out.println("You Lose!");
+                userOutput.displayBoard(board);
+                isGameOver = true;
+            }
+
+        }
             // 2. Display the board
-
             // 3. Ask the user to select an available position on the board.
             // A valid position is one that's not already selected,
             // i.e. not X_MARKER or O_MARKER
